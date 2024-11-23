@@ -15,7 +15,7 @@ jobs:
 
       - name: List new commits
         id: should_run
-        run: git log --since="5 minutes ago" --oneline
+        run: echo git log --since="5 minutes ago" --oneline
       
       - name: Check if new commits exist
         id: get_commit
