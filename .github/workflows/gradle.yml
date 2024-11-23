@@ -8,22 +8,21 @@ jobs:
   should_run:
     runs-on: ubuntu-latest
     outputs:
-      should_run: hello
+      should_run: ${{ steps.should_run.outputs.should_run }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: List new commits
-        id: should_run
         run: |
             echo "Checking for new commits";
             git log --since="15 minutes ago" --oneline;
             echo "---";
       
       - name: Check if new commits exist
-        id: get_commit
+        id: should_run
         run: | 
-          if git log --since="5 minutes ago" --pretty=format:"%h - %an" | grep -q "-"; then
+          if git log --since="15 minutes ago" --pretty=format:"%h - %an" | grep -q "-"; then
               echo "should_run=true" >> $GITHUB_OUTPUT
           else
               echo "should_run=false" >> $GITHUB_OUTPUT
