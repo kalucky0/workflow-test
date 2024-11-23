@@ -2,7 +2,7 @@ name: Java CI with Gradle
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/10 * * * *'
 
 jobs:
   should_run:
@@ -15,7 +15,10 @@ jobs:
 
       - name: List new commits
         id: should_run
-        run: echo git log --since="5 minutes ago" --oneline
+        run: |
+            echo "Checking for new commits"
+            git log --since="10 minutes ago" --oneline
+            echo "---"
       
       - name: Check if new commits exist
         id: get_commit
